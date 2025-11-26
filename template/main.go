@@ -1,11 +1,11 @@
 package main
 
-import "github.com/firefly-zero/firefly-go/firefly"
+import . "github.com/firefly-zero/firefly-go/firefly"
 
 func init() {
-	firefly.Boot = boot
-	firefly.Update = update
-	firefly.Render = render
+	Boot = boot
+	Update = update
+	Render = render
 }
 
 func boot() {

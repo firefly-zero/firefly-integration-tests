@@ -35,24 +35,30 @@ class Manager:
     def app(self) -> App:
         return App(id="test.app", vfs_path=self.vfs_path)
 
-    @staticmethod
-    def render(
+    def build(
+        self,
         boot: str | None = None,
         update: str | None = None,
         render: str | None = None,
-    ) -> str:
-        result = CODE_TEMPLATE
-        if boot:
-            result = result.replace("// BOOT", boot)
-        if update:
-            result = result.replace("// UPDATE", update)
-        if render:
-            result = result.replace("// RENDER", render)
-        return result
-
-    def build(self, code: str) -> None:
+    ) -> None:
+        code = _render(boot=boot, update=update, render=render)
         (self.app_path / "main.go").write_text(code)
         (self.app_path / "go.mod").write_text(GOMOD)
         (self.app_path / "go.sum").write_text(GOSUM)
         (self.app_path / "firefly.toml").write_text(CONFIG)
         self.cli.build(root=self.app_path)
+
+
+def _render(
+    boot: str | None = None,
+    update: str | None = None,
+    render: str | None = None,
+) -> str:
+    result = CODE_TEMPLATE
+    if boot:
+        result = result.replace("// BOOT", boot)
+    if update:
+        result = result.replace("// UPDATE", update)
+    if render:
+        result = result.replace("// RENDER", render)
+    return result
