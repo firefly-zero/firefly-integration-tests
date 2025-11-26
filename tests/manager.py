@@ -4,8 +4,11 @@ from pathlib import Path
 from firefly_test import CLI, App
 
 
-TEMPLATE_PATH = Path(__file__).parent / "template.go"
-TEMPLATE = TEMPLATE_PATH.read_text("utf-8")
+ROOT = Path(__file__).parent.parent
+CODE_TEMPLATE = (ROOT / "template" / "main.go").read_text("utf-8")
+GOMOD = (ROOT / "template" / "go.mod").read_text("utf-8")
+GOSUM = (ROOT / "template" / "go.sum").read_text("utf-8")
+CONFIG = (ROOT / "template" / "firefly.toml").read_text("utf-8")
 
 
 @dataclass
@@ -38,7 +41,7 @@ class Manager:
         update: str | None = None,
         render: str | None = None,
     ) -> str:
-        result = TEMPLATE
+        result = CODE_TEMPLATE
         if boot:
             result = result.replace("// BOOT", boot)
         if update:
@@ -48,7 +51,8 @@ class Manager:
         return result
 
     def build(self, code: str) -> None:
-        path = self.app_path / "main.go"
-        path.write_text(code)
-        ...
+        (self.app_path / "main.go").write_text(code)
+        (self.app_path / "go.mod").write_text(GOMOD)
+        (self.app_path / "go.sum").write_text(GOSUM)
+        (self.app_path / "firefly.toml").write_text(CONFIG)
         self.cli.build(root=self.app_path)
