@@ -27,3 +27,54 @@ def test_rect_w1_solid(manager: Manager) -> None:
         ●RRRR●●●
         ●●●●●●●●
     """)
+
+
+def test_rect_w1_outlined(manager: Manager) -> None:
+    manager.build_and_render(
+        boot='DrawRect(P(12, 13), S(4, 3), Outlined(ColorRed, 1))',
+    )
+    sub = manager.app.frame.get_sub(x=11, y=12)
+    sub.assert_match("""
+        ●●●●●●●●
+        ●RRRR●●●
+        ●R●●R●●●
+        ●RRRR●●●
+        ●●●●●●●●
+    """)
+
+
+def test_rect_w2_outlined(manager: Manager) -> None:
+    manager.build_and_render(
+        boot='DrawRect(P(12, 13), S(5, 4), Outlined(ColorRed, 2))',
+    )
+    sub = manager.app.frame.get_sub(x=10, y=11)
+    # For even line width, outline has the additional pixels on the inside.
+    sub.assert_match("""
+        ●●●●●●●●●●
+        ●RRRRRRR●●
+        ●RRRRRRR●●
+        ●RR●●●RR●●
+        ●RR●●●RR●●
+        ●RRRRRRR●●
+        ●RRRRRRR●●
+        ●●●●●●●●●●
+    """)
+
+
+def test_rect_w3_outlined(manager: Manager) -> None:
+    manager.build_and_render(
+        boot='DrawRect(P(12, 13), S(6, 5), Outlined(ColorRed, 3))',
+    )
+    sub = manager.app.frame.get_sub(x=10, y=11)
+    # For width over 1, outline grows equally inside and outside.
+    sub.assert_match("""
+        ●●●●●●●●●●●
+        ●RRRRRRRR●●
+        ●RRRRRRRR●●
+        ●RRRRRRRR●●
+        ●RRR●●RRR●●
+        ●RRRRRRRR●●
+        ●RRRRRRRR●●
+        ●RRRRRRRR●●
+        ●●●●●●●●●●●
+    """)

@@ -47,7 +47,7 @@ def test_line_w2_hor_inverse(manager: Manager) -> None:
     sub = manager.app.frame.get_sub(x=11, y=12)
     # The order of points when drawing the line affects
     # on which side the "extra" pixels will be drawn
-    # when the line width is odd.
+    # when the line width is even.
     sub.assert_match("""
         ●●●●●●●●
         ●●●●●●●●
