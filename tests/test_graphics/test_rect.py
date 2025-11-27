@@ -78,3 +78,37 @@ def test_rect_w3_outlined(manager: Manager) -> None:
         ●RRRRRRRR●●
         ●●●●●●●●●●●
     """)
+
+
+def test_rect_w1_ident_vert(manager: Manager) -> None:
+    manager.build_and_render(
+        boot='DrawRect(P(12, 13), S(3, 0), Outlined(ColorRed, 1))',
+    )
+    for color in manager.app.frame:
+        assert color == color.BLACK
+
+
+def test_rect_w2_ident_vert(manager: Manager) -> None:
+    manager.build_and_render(
+        boot='DrawRect(P(12, 13), S(3, 0), Outlined(ColorRed, 2))',
+    )
+    sub = manager.app.frame.get_sub(x=10, y=12)
+    sub.assert_match("""
+        ●●●●●●●
+        ●RRRRR●
+        ●RRRRR●
+        ●●●●●●●
+    """)
+
+
+def test_rect_w3_ident_vert(manager: Manager) -> None:
+    manager.build_and_render(
+        boot='DrawRect(P(12, 13), S(3, 0), Outlined(ColorRed, 3))',
+    )
+    sub = manager.app.frame.get_sub(x=10, y=12)
+    sub.assert_match("""
+        ●●●●●●●
+        ●RRRRR●
+        ●RRRRR●
+        ●●●●●●●
+    """)
