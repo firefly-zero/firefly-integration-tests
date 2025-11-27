@@ -35,6 +35,17 @@ class Manager:
     def app(self) -> App:
         return App(id="test.app", vfs_path=self.vfs_path)
 
+    def build_and_render(
+        self,
+        boot: str | None = None,
+        update: str | None = None,
+        render: str | None = None,
+    ) -> None:
+        self.build(boot=boot, update=update, render=render)
+        self.app.start()
+        self.app.update()
+        self.app.update()
+
     def build(
         self,
         boot: str | None = None,

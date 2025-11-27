@@ -11,10 +11,9 @@ def test_point_1(tmp_path: Path) -> None:
     manager.app.update()
     manager.app.update()
     assert manager.app.frame.at(12, 14) == Color.RED
-    sub = manager.app.frame.get_sub(x=10, y=12)
+    sub = manager.app.frame.get_sub(x=11, y=13)
     sub.assert_match("""
-        KKKK
-        KKKK
-        KKRK
-        KKKK
+        KKK
+        KRK
+        KKK
     """)
