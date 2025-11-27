@@ -29,4 +29,9 @@ def test_get_name(manager: Manager) -> None:
         if len(name) > 16 {
             panic("")
         }
+        // In the offline mode, any peer ID (even invalid one)
+        // returns the current device name.
+        if GetName(60) != name {
+            panic("")
+        }
     """)
