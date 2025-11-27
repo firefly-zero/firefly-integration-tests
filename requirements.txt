@@ -1,0 +1,4 @@
+pytest
+firefly-test
+pytest-randomly
+pytest-xdist

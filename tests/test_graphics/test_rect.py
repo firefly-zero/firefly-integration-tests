@@ -1,3 +1,4 @@
+from firefly_test import Color
 from ..manager import Manager
 
 
@@ -85,7 +86,7 @@ def test_rect_w1_ident_vert(manager: Manager) -> None:
         boot='DrawRect(P(12, 13), S(3, 0), Outlined(ColorRed, 1))',
     )
     for color in manager.app.frame:
-        assert color == color.BLACK
+        assert color == Color.BLACK
 
 
 def test_rect_w2_ident_vert(manager: Manager) -> None:
@@ -112,3 +113,11 @@ def test_rect_w3_ident_vert(manager: Manager) -> None:
         ●RRRRR●
         ●●●●●●●
     """)
+
+
+def test_rect_w1_ident_hor(manager: Manager) -> None:
+    manager.build_and_render(
+        boot='DrawRect(P(12, 13), S(0, 3), Outlined(ColorRed, 1))',
+    )
+    for color in manager.app.frame:
+        assert color == Color.BLACK
