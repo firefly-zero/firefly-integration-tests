@@ -44,7 +44,6 @@ class Manager:
         self.build(boot=boot, update=update, render=render)
         self.app.start()
         self.app.update()
-        self.app.update()
 
     def build(
         self,
