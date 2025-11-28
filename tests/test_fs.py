@@ -7,8 +7,6 @@ def test_file_roundtrip(manager: Manager) -> None:
             old := "hello"
             DumpFile("fname", []byte(old))
             new := LoadFile("fname", nil)
-            if string(new.Raw) != old {
-                panic("")
-            }
+            assert(string(new.Raw) == old)
         """,
     )

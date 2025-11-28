@@ -6,9 +6,7 @@ def test_buttons__none_pressed(manager: Manager) -> None:
     manager.build(
         update="""
             b := ReadButtons(GetMe())
-            if b.AnyPressed() {
-                panic("")
-            }
+            assert(!b.AnyPressed())
         """,
     )
     manager.app.start()
@@ -19,12 +17,9 @@ def test_buttons__s_pressed(manager: Manager) -> None:
     manager.build(
         update="""
             b := ReadButtons(GetMe())
-            if !b.S || !b.AnyPressed() {
-                panic("")
-            }
-            if b.E || b.W || b.N {
-                panic("")
-            }
+            assert(b.S)
+            assert(b.AnyPressed())
+            assert(!b.E && !b.W && !b.N)
         """,
     )
     manager.app.start()

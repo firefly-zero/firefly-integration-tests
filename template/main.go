@@ -19,3 +19,9 @@ func update() {
 func render() {
 	// RENDER
 }
+
+func assert(ok bool) {
+	if !ok {
+		panic("assertion failed")
+	}
+}
