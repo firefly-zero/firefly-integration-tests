@@ -16,7 +16,49 @@ def test_rect_w1_filled(manager: Manager) -> None:
     """)
 
 
-def test_rect_w1_solid(manager: Manager) -> None:
+def test_rect_solid_w1(manager: Manager) -> None:
+    manager.build_and_render(
+        boot='DrawRect(P(12, 13), S(1, 3), Solid(ColorRed))',
+    )
+    sub = manager.app.frame.get_sub(x=11, y=12)
+    sub.assert_match("""
+        ●●●●●●●●
+        ●R●●●●●●
+        ●R●●●●●●
+        ●R●●●●●●
+        ●●●●●●●●
+    """)
+
+
+def test_rect_solid_w2(manager: Manager) -> None:
+    manager.build_and_render(
+        boot='DrawRect(P(12, 13), S(2, 3), Solid(ColorRed))',
+    )
+    sub = manager.app.frame.get_sub(x=11, y=12)
+    sub.assert_match("""
+        ●●●●●●●●
+        ●RR●●●●●
+        ●RR●●●●●
+        ●RR●●●●●
+        ●●●●●●●●
+    """)
+
+
+def test_rect_solid_w3(manager: Manager) -> None:
+    manager.build_and_render(
+        boot='DrawRect(P(12, 13), S(3, 3), Solid(ColorRed))',
+    )
+    sub = manager.app.frame.get_sub(x=11, y=12)
+    sub.assert_match("""
+        ●●●●●●●●
+        ●RRR●●●●
+        ●RRR●●●●
+        ●RRR●●●●
+        ●●●●●●●●
+    """)
+
+
+def test_rect_solid_w4(manager: Manager) -> None:
     manager.build_and_render(
         boot='DrawRect(P(12, 13), S(4, 3), Solid(ColorRed))',
     )
@@ -27,6 +69,48 @@ def test_rect_w1_solid(manager: Manager) -> None:
         ●RRRR●●●
         ●RRRR●●●
         ●●●●●●●●
+    """)
+
+
+def test_rect_solid_w5(manager: Manager) -> None:
+    manager.build_and_render(
+        boot='DrawRect(P(12, 13), S(5, 3), Solid(ColorRed))',
+    )
+    sub = manager.app.frame.get_sub(x=11, y=12)
+    sub.assert_match("""
+        ●●●●●●●●
+        ●RRRRR●●
+        ●RRRRR●●
+        ●RRRRR●●
+        ●●●●●●●●
+    """)
+
+
+def test_rect_solid_w6(manager: Manager) -> None:
+    manager.build_and_render(
+        boot='DrawRect(P(12, 13), S(6, 3), Solid(ColorRed))',
+    )
+    sub = manager.app.frame.get_sub(x=11, y=12)
+    sub.assert_match("""
+        ●●●●●●●●
+        ●RRRRRR●
+        ●RRRRRR●
+        ●RRRRRR●
+        ●●●●●●●●
+    """)
+
+
+def test_rect_solid_w7(manager: Manager) -> None:
+    manager.build_and_render(
+        boot='DrawRect(P(12, 13), S(7, 3), Solid(ColorRed))',
+    )
+    sub = manager.app.frame.get_sub(x=11, y=12)
+    sub.assert_match("""
+        ●●●●●●●●●
+        ●RRRRRRR●
+        ●RRRRRRR●
+        ●RRRRRRR●
+        ●●●●●●●●●
     """)
 
 
